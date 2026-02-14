@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <title>💗🦋 For Sophie</title>
+
+    <style>
+        :root {
+            --red: #ff4fbf;
+            /* main pink */
+            --blue: #ff9ad5;
+            /* soft pink */
+            --bg1: #080613;
+            --bg2: #140826;
+            --glass: rgba(255, 255, 255, .14);
+            --stroke: rgba(255, 255, 255, .25);
+            --txt: rgba(255, 255, 255, .92);
+            --muted: rgba(255, 255, 255, .72);
+            --shadow: 0 24px 60px rgba(0, 0, 0, .35);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            color: var(--txt);
+            font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+            overflow: hidden;
+            background: linear-gradient(180deg, var(--bg1), var(--bg2));
+        }
+
+        /* ====== Animated Background ====== */
+        .bg {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(900px 700px at 15% 20%, rgba(255, 154, 213, .22), transparent 65%),
+                radial-gradient(900px 700px at 85% 30%, rgba(255, 79, 191, .22), transparent 68%),
+                conic-gradient(from 180deg, rgba(255, 154, 213, .08), rgba(255, 79, 191, .10), rgba(255, 154, 213, .08));
+            filter: blur(10px) saturate(125%);
+            transform: scale(1.08);
+            animation: bgShift 10s ease-in-out infinite alternate;
+            z-index: -6;
+        }
+
+        @keyframes bgShift {
+            from {
+                transform: scale(1.08) rotate(0deg);
+            }
+
+            to {
+                transform: scale(1.14) rotate(8deg);
+            }
+        }
+
+        /* Aurora ribbons */
+        .aurora {
+            position: fixed;
+            inset: -20%;
+            background:
+                radial-gradient(closest-side, rgba(255, 154, 213, .20), transparent 70%),
+                radial-gradient(closest-side, rgba(255, 79, 191, .20), transparent 70%);
+            mix-blend-mode: screen;
+            filter: blur(30px);
+            animation: auroraMove 12s ease-in-out infinite alternate;
+            z-index: -5;
+        }
+
+        @keyframes auroraMove {
+            from {
+                transform: translate(-3%, -2%) rotate(-6deg);
+            }
+
+            to {
+                transform: translate(3%, 2%) rotate(6deg);
+            }
+        }
+
+        /* Bokeh shimmer */
+        .bokeh {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(12px 12px at 15% 30%, rgba(255, 255, 255, .10), transparent 60%),
+                radial-gradient(10px 10px at 35% 70%, rgba(255, 255, 255, .08), transparent 60%),
+                radial-gradient(14px 14px at 60% 40%, rgba(255, 255, 255, .08), transparent 60%),
+                radial-gradient(9px 9px at 80% 65%, rgba(255, 255, 255, .08), transparent 60%),
+                radial-gradient(11px 11px at 90% 25%, rgba(255, 255, 255, .09), transparent 60%);
+            animation: bokehFloat 8s ease-in-out infinite alternate;
+            z-index: -4;
+            opacity: .85;
+        }
+
+        @keyframes bokehFloat {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-18px);
+            }
+        }
+
+        /* Canvas + layers */
+        #sparkles {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+        }
+
+        #hearts-layer,
+        #butterflies-layer,
+        #petals-layer {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        /* ====== Screens ====== */
+        .screen {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .screen.active {
+            display: flex;
+        }
+
+        /* Allow scroll on small phones for letter screen */
+        @media (max-width: 900px) {
+            body {
+                overflow: auto;
+            }
+
+            .screen {
+                position: relative;
+                min-height: 100vh;
+            }
+        }
+
+        /* ====== Glass Card ====== */
+        .glass {
+            background: var(--glass);
+            border: 1px solid var(--stroke);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(14px);
+        }
+
+        .card {
+            width: min(560px, 96vw);
+            padding: 22px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background:
+                radial-gradient(700px 260px at 20% 20%, rgba(255, 154, 213, .20), transparent 55%),
+                radial-gradient(700px 260px at 80% 25%, rgba(255, 79, 191, .20), transparent 55%);
+            z-index: -1;
+        }
+
+        .pop {
+            animation: popIn .7s ease both;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: translateY(12px) scale(.98);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 13px;
+            color: var(--muted);
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: rgba(0, 0, 0, .18);
+        }
+
+        .title {
+            margin: 14px 0 8px;
+            font-size: clamp(28px, 6vw, 46px);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+        }
+
+        .accent {
+            background: linear-gradient(90deg, var(--red), var(--blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .accent2 {
+            background: linear-gradient(90deg, var(--blue), var(--red));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .subtitle {
+            margin: 0 0 18px;
+            color: var(--muted);
+            font-size: 15.5px;
+        }
+
+        .hint {
+            margin-top: 14px;
+            color: rgba(255, 255, 255, .55);
+            font-size: 12.5px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 16px;
+            font-weight: 800;
+            cursor: pointer;
+            color: rgba(255, 255, 255, .95);
+            transition: transform .12s ease, filter .12s ease;
+            user-select: none;
+        }
+
+        .btn:active {
+            transform: scale(.98);
+        }
+
+        .btn:hover {
+            filter: brightness(1.06);
+        }
+
+        .primary {
+            background: linear-gradient(90deg, var(--red), var(--blue));
+            box-shadow: 0 14px 28px rgba(255, 79, 191, .18);
+        }
+
+        .soft {
+            background: rgba(255, 255, 255, .14);
+            border: 1px solid rgba(255, 255, 255, .22);
+        }
+
+        .ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, .22);
+        }
+
+        /* ====== Letter Layout ====== */
+        .layout {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 14px;
+            width: min(980px, 98vw);
+            align-items: stretch;
+        }
+
+        @media (max-width: 860px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .headline {
+            margin: 0 0 10px;
+            font-size: clamp(22px, 4.8vw, 32px);
+        }
+
+        .headerRow {
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 12px;
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: rgba(0, 0, 0, .18);
+            color: rgba(255, 255, 255, .75);
+        }
+
+        .type {
+            margin: 10px 0 0;
+            min-height: 160px;
+            line-height: 1.75;
+            color: rgba(255, 255, 255, .90);
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tiny-note {
+            margin-top: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, .62);
+        }
+
+        /* Photo frame + slider */
+        .frame {
+            padding: 18px;
+        }
+
+        /* Emoji fade slider */
+        .photo.slider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .emoji-slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 92px;
+            /* emoji size */
+            opacity: 0;
+            transform: scale(1.04);
+            transition: opacity 2.0s ease-in-out, transform 2.8s ease-in-out;
+            filter: drop-shadow(0 18px 40px rgba(255, 79, 191, .18));
+        }
+
+        .emoji-slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+
+        .dots {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            padding: 6px 8px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, .22);
+            border: 1px solid rgba(255, 255, 255, .18);
+            backdrop-filter: blur(10px);
+        }
+
+        .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .35);
+            cursor: pointer;
+            transition: transform .15s ease, background .15s ease;
+        }
+
+        .dot.active {
+            background: rgba(255, 255, 255, .9);
+            transform: scale(1.2);
+        }
+
+        .mini {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .chip {
+            font-size: 12px;
+            color: rgba(255, 255, 255, .80);
+            padding: 8px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .18);
+            background: rgba(0, 0, 0, .18);
+        }
+
+        /* Finale */
+        .center {
+            text-align: center;
+        }
+
+        .finaleCard {
+            width: min(560px, 96vw);
+        }
+
+        .big-heart {
+            font-size: 76px;
+            filter: drop-shadow(0 18px 40px rgba(255, 79, 191, .22));
+            animation: floaty 2.8s ease-in-out infinite;
+        }
+
+        @keyframes floaty {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .centerActions {
+            justify-content: center;
+        }
+
+        /* ====== Music Button ====== */
+        .music-btn {
+            position: fixed;
+            top: 14px;
+            right: 14px;
+            width: 46px;
+            height: 46px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, .20);
+            background: rgba(0, 0, 0, .18);
+            color: rgba(255, 255, 255, .85);
+            cursor: pointer;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            transition: transform .12s ease, filter .12s ease;
+        }
+
+        .music-btn:hover {
+            filter: brightness(1.08);
+        }
+
+        .music-btn.on {
+            background: linear-gradient(90deg, rgba(255, 79, 191, .35), rgba(255, 154, 213, .30));
+            border-color: rgba(255, 255, 255, .35);
+        }
+
+        /* ====== Floating FX ====== */
+        .heart {
+            position: absolute;
+            opacity: .9;
+            animation: rise linear forwards;
+            filter: drop-shadow(0 12px 18px rgba(0, 0, 0, .25));
+            will-change: transform, opacity;
+        }
+
+        @keyframes rise {
+            from {
+                transform: translateY(0) scale(.9);
+                opacity: 0;
+            }
+
+            12% {
+                opacity: .95;
+            }
+
+            to {
+                transform: translateY(-120vh) scale(1.25);
+                opacity: 0;
+            }
+        }
+
+        .petal {
+            position: absolute;
+            opacity: .88;
+            animation: fall linear forwards;
+            will-change: transform, opacity;
+            filter: drop-shadow(0 10px 16px rgba(0, 0, 0, .18));
+        }
+
+        @keyframes fall {
+            from {
+                transform: translateY(-10vh) translateX(0) rotate(0deg) scale(.9);
+                opacity: 0;
+            }
+
+            12% {
+                opacity: .92;
+            }
+
+            to {
+                transform: translateY(115vh) translateX(120px) rotate(360deg) scale(1.1);
+                opacity: 0;
+            }
+        }
+
+        .butterfly {
+            position: absolute;
+            font-size: 18px;
+            opacity: .92;
+            animation: flutter linear forwards;
+            filter: drop-shadow(0 10px 18px rgba(0, 0, 0, .22));
+            will-change: transform, opacity;
+        }
+
+        @keyframes flutter {
+            from {
+                transform: translateX(-15vw) translateY(70vh) scale(.9);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: .95;
+            }
+
+            50% {
+                transform: translateX(55vw) translateY(40vh) scale(1.1) rotate(3deg);
+            }
+
+            to {
+                transform: translateX(115vw) translateY(25vh) scale(1.0) rotate(-4deg);
+                opacity: 0;
+            }
+        }
+
+        /* ====== Heart glow effect (for "prayer" / sweet part) ====== */
+        .glow-heart {
+            position: absolute;
+            right: 16px;
+            top: 54px;
+            font-size: 38px;
+            opacity: 0;
+            transform: scale(.9);
+            transition: opacity .6s ease, transform .6s ease;
+            filter: drop-shadow(0 0 0 rgba(255, 79, 191, 0));
+        }
+
+        .glow-heart.on {
+            opacity: 1;
+            transform: scale(1.05);
+            animation: glowPulse 1.4s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+
+            0%,
+            100% {
+                filter: drop-shadow(0 0 16px rgba(255, 79, 191, .55)) drop-shadow(0 0 26px rgba(255, 154, 213, .35));
+                transform: scale(1.02);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 26px rgba(255, 79, 191, .75)) drop-shadow(0 0 36px rgba(255, 154, 213, .55));
+                transform: scale(1.08);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated background -->
+    <div class="bg"></div>
+    <div class="aurora"></div>
+    <div class="bokeh"></div>
+
+    <!-- FX Layers -->
+    <canvas id="sparkles"></canvas>
+    <div id="hearts-layer"></div>
+    <div id="butterflies-layer"></div>
+    <div id="petals-layer"></div>
+
+    <!-- Music (optional). Put "chike.mp3" in same folder or change filename -->
+    <button id="musicBtn" class="music-btn" aria-label="Toggle music">♪</button>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="chike.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Intro -->
+    <section class="screen intro active" id="intro">
+        <div class="glass card pop">
+            <div class="badge">For Sophie 💗🦋</div>
+            <h1 class="title">Something <span class="accent">Soft</span> For You ✨</h1>
+            <p class="subtitle">
+                Sophie… Dearie… Sweetie 🥹💗
+                I don’t know how to explain this…
+                but my heart has been smiling because of you.
+                Tap below and let me show you something special 🦋✨
+            </p>
+
+            <button class="btn primary" id="openHeartBtn">
+                Open what I feel 💗
+            </button>
+
+            <p class="hint">Put on the music… it makes it softer 🎶💞</p>
+        </div>
+    </section>
+
+
+    <!-- Letter -->
+    <section class="screen letter" id="letter">
+        <div class="layout">
+            <div class="glass card">
+                <div class="headerRow">
+                    <h2 class="headline">To My <span class="accent2">Sweet Sophie</span> 💌</h2>
+                    <span class="tag">From someone who quietly admires you 💗</span>
+                </div>
+
+                <div id="glowHeart" class="glow-heart" aria-hidden="true">💗</div>
+
+                <p id="typeText" class="type"></p>
+
+                <div class="actions">
+                    <button class="btn soft" id="nextBtn">Keep reading 🙏✨</button>
+                    <button class="btn ghost" id="replayBtn">Read again 🔁</button>
+                </div>
+
+                <p class="tiny-note">
+                    I wrote this slowly… because feelings like this deserve time 🥹💗
+                </p>
+            </div>
+
+            <div class="glass frame card">
+                <div class="photo slider" id="photoSlider">
+                    <div class="emoji-slide active">💗</div>
+                    <div class="emoji-slide">🦋</div>
+                    <div class="emoji-slide">🌸</div>
+                    <div class="emoji-slide">✨</div>
+                    <div class="emoji-slide">💞</div>
+                    <div class="emoji-slide">🌹</div>
+
+                    <div class="dots" id="sliderDots"></div>
+                </div>
+
+
+                <div class="mini">
+                    <div class="chip">Pink butterflies 🦋💗</div>
+                    <div class="chip">Flowers 🌸</div>
+                    <div class="chip">Hearts 💗</div>
+                    <div class="chip">Sweetie 😭✨</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Finale -->
+    <section class="screen finale" id="finale">
+        <div class="glass card center finaleCard">
+            <div class="big-heart">💗🦋</div>
+            <h2 class="headline big">Sophie… you’re rare 💗</h2>
+            <p class="subtitle" id="finalMsg">
+                Dearie… Sweetie…
+                if the world ever forgets to remind you how special you are,
+                I’ll be here to do it 🥹✨
+            </p>
+
+            <div class="actions centerActions">
+                <button class="btn primary" id="shareBtn">Send you something sweet 💌</button>
+                <button class="btn soft" id="restartBtn">Feel it again 🔁</button>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        // ===================== helpers =====================
+        const $ = (sel) => document.querySelector(sel);
+
+        function showScreen(id) {
+            document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+            $(id).classList.add("active");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+
+        // ===================== MUSIC =====================
+        const musicBtn = $("#musicBtn");
+        const bgMusic = $("#bgMusic");
+
+        async function startMusic() {
+            try {
+                if (bgMusic.paused) {
+                    await bgMusic.play();
+                    musicBtn.classList.add("on");
+                }
+            } catch { /* ignore */ }
+        }
+
+        musicBtn.addEventListener("click", async () => {
+            try {
+                if (bgMusic.paused) {
+                    await bgMusic.play();
+                    musicBtn.classList.add("on");
+                } else {
+                    bgMusic.pause();
+                    musicBtn.classList.remove("on");
+                }
+            } catch {
+                alert("Tap again to allow music 💗");
+            }
+        });
+
+        // ===================== CANVAS SPARKLES =====================
+        const canvas = $("#sparkles");
+        const ctx = canvas.getContext("2d");
+        let W = 0, H = 0;
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        const sparkles = Array.from({ length: 120 }, () => ({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            r: 0.6 + Math.random() * 1.9,
+            a: 0.15 + Math.random() * 0.75,
+            vx: (-0.35 + Math.random() * 0.7),
+            vy: (-0.25 + Math.random() * 0.6)
+        }));
+
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            for (const s of sparkles) {
+                s.x += s.vx; s.y += s.vy;
+                if (s.x < 0) s.x = W; if (s.x > W) s.x = 0;
+                if (s.y < 0) s.y = H; if (s.y > H) s.y = 0;
+
+                ctx.globalAlpha = s.a;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                ctx.fillStyle = "#fff";
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(draw);
+        }
+        draw();
+
+        // ===================== HEARTS =====================
+        const heartsLayer = $("#hearts-layer");
+        const heartEmojis = ["💗", "💖", "💕", "💞", "💘", "❤️‍🔥", "💓", "✨💗"];
+
+        function spawnHeart() {
+            const el = document.createElement("div");
+            el.className = "heart";
+            el.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            el.style.left = `${Math.random() * window.innerWidth}px`;
+            el.style.bottom = `-40px`;
+
+            const duration = 5.5 + Math.random() * 5.5;
+            el.style.animationDuration = `${duration}s`;
+
+            const size = 14 + Math.random() * 26;
+            el.style.fontSize = `${size}px`;
+
+            heartsLayer.appendChild(el);
+            setTimeout(() => el.remove(), duration * 1000);
+        }
+        setInterval(spawnHeart, 360);
+
+        // ===================== PETALS / FLOWERS =====================
+        const petalsLayer = $("#petals-layer");
+        const petals = ["🌸", "💗", "🌺", "🌷", "💐", "🌹", "💖", "💞", "🌸"];
+
+        function spawnPetal() {
+            const el = document.createElement("div");
+            el.className = "petal";
+            el.textContent = petals[Math.floor(Math.random() * petals.length)];
+            el.style.left = `${Math.random() * window.innerWidth}px`;
+            el.style.top = `-80px`;
+
+            const duration = 7 + Math.random() * 7;
+            el.style.animationDuration = `${duration}s`;
+
+            const size = 16 + Math.random() * 22;
+            el.style.fontSize = `${size}px`;
+
+            petalsLayer.appendChild(el);
+            setTimeout(() => el.remove(), duration * 1000);
+        }
+        setInterval(spawnPetal, 900);
+
+        // ===================== BUTTERFLIES (PINK) =====================
+        const butterfliesLayer = $("#butterflies-layer");
+        const butterflyEmojis = ["🦋💗", "💗🦋", "✨🦋💗", "🦋✨", "💞🦋", "🦋💖"];
+
+        function spawnButterfly() {
+            const el = document.createElement("div");
+            el.className = "butterfly";
+            el.textContent = butterflyEmojis[Math.floor(Math.random() * butterflyEmojis.length)];
+
+            const y = 20 + Math.random() * 60;
+            el.style.top = `${y}vh`;
+
+            const duration = 9 + Math.random() * 7;
+            el.style.animationDuration = `${duration}s`;
+
+            const size = 18 + Math.random() * 18;
+            el.style.fontSize = `${size}px`;
+
+            butterfliesLayer.appendChild(el);
+            setTimeout(() => el.remove(), duration * 1000);
+        }
+        setInterval(spawnButterfly, 2200);
+
+        // ===================== TYPEWRITER (SLOW) =====================
+        const typeEl = $("#typeText");
+        let typingTimer = null;
+
+        const loveLetter = `Sophie… Dearie 🥹💗
+
+I don’t think you understand what you do to me.
+
+It’s not just that you’re beautiful.
+It’s not just that you’re sweet.
+
+It’s the way your presence feels.
+
+When I think about you, my heart becomes calm.
+When I see your name, my mood changes instantly.
+When you smile, it feels like the world becomes lighter.
+
+You have this softness about you…
+Not weakness  softness.
+The kind that makes people feel safe.
+The kind that makes someone want to protect you without even thinking.
+
+Sweetie, you are rare.
+
+In a world where so many people pretend,
+you are real.
+In a world where hearts are guarded,
+yours still feels open and warm.
+
+And that touches me deeply.
+
+Sometimes I wonder if you know how valuable you are.
+How special you are.
+How your energy alone can change someone’s entire day.
+
+You don’t even try.
+You just exist.
+And that’s enough.
+
+If I’m honest…
+I don’t just admire you.
+
+I respect you.
+I cherish the way you carry yourself.
+I admire your kindness.
+I admire your gentleness.
+
+And if one day I ever get the chance to be close to your heart…
+I promise I would handle it carefully.
+Because something that pure deserves careful hands.
+
+Sophie… you’re not just someone I like.
+You’re someone I’m thankful for.
+
+And whether near or far,
+please always remember this:
+
+You are deeply loved.
+You are deeply valued.
+And you are more special than you know.
+
+From someone whose heart smiles because of you 💗🦋`;
+
+
+        const prayerMessage = `Sophie 💗🙏
+
+I pray God protects your heart from anything that would try to break it.
+
+I pray He surrounds you with peace,
+covers you with favor,
+and fills your life with joy.
+
+May your dreams grow.
+May your confidence increase.
+May your happiness never depend on people who don’t value you.
+
+May you always be treated with respect.
+May you always be chosen intentionally.
+May you never feel small or unimportant.
+
+And if I ever get the privilege to be part of your journey,
+I pray I never become the reason you doubt your worth.
+
+You deserve a love that feels safe.
+You deserve a love that feels calm.
+You deserve a love that feels certain.
+
+And I hope life gives you nothing less 💗✨`;
+
+
+        const BASE_SPEED = 140; // slow & readable
+
+        function typeWriter(text, speed = BASE_SPEED) {
+            clearInterval(typingTimer);
+            typeEl.textContent = "";
+            let i = 0;
+
+            typingTimer = setInterval(() => {
+                typeEl.textContent += text[i] || "";
+                i++;
+
+                const ch = text[i - 1];
+
+                if (ch === "." || ch === "!" || ch === "?") {
+                    clearInterval(typingTimer);
+                    setTimeout(() => typeWriter(text.slice(i), speed), 700);
+                    return;
+                }
+
+                if (ch === "\n") {
+                    clearInterval(typingTimer);
+                    setTimeout(() => typeWriter(text.slice(i), speed), 500);
+                    return;
+                }
+
+
+                if (i >= text.length) clearInterval(typingTimer);
+            }, speed);
+        }
+
+        // ===================== FLOW =====================
+        const glowHeart = $("#glowHeart");
+
+        $("#openHeartBtn").addEventListener("click", async () => {
+            await startMusic();        // autoplay on user tap
+            showScreen("#letter");
+            glowHeart.classList.remove("on");
+
+            for (let i = 0; i < 18; i++) setTimeout(spawnHeart, i * 60);
+            for (let i = 0; i < 10; i++) setTimeout(spawnPetal, i * 120);
+            setTimeout(spawnButterfly, 220);
+
+            typeWriter(loveLetter, BASE_SPEED);
+        });
+
+        $("#replayBtn").addEventListener("click", () => {
+            glowHeart.classList.remove("on");
+            typeWriter(loveLetter, BASE_SPEED);
+        });
+
+        $("#nextBtn").addEventListener("click", () => {
+            glowHeart.classList.add("on");
+
+            for (let i = 0; i < 26; i++) setTimeout(spawnHeart, i * 45);
+            for (let i = 0; i < 16; i++) setTimeout(spawnPetal, i * 90);
+            setTimeout(spawnButterfly, 200);
+            setTimeout(spawnButterfly, 1000);
+
+            typeWriter(prayerMessage, BASE_SPEED + 6);
+
+            // optional: show finale after prayer finishes (approx)
+            const approxMs = prayerMessage.length * (BASE_SPEED + 6);
+            setTimeout(() => showScreen("#finale"), Math.min(approxMs + 1200, 26000));
+        });
+
+        $("#shareBtn").addEventListener("click", async () => {
+            const msg =
+                `Happy Valentine Sophie 💗🦋
+
+Sweetie… you don’t even know how much your presence means to me 🥹
+
+You make simple things feel special.
+You make ordinary days feel brighter.
+
+Somewhere out here, there’s a heart smiling because of you.
+
+Mine 💖✨`;
+
+
+            try {
+                await navigator.clipboard.writeText(msg);
+                alert("Copied! Paste it on WhatsApp 💌");
+            } catch {
+                prompt("Copy this message:", msg);
+            }
+        });
+
+        $("#restartBtn").addEventListener("click", () => {
+            glowHeart.classList.remove("on");
+            showScreen("#intro");
+        });
+
+        /* ===================== FADE SLIDER ===================== */
+        (function initFadeSlider() {
+            const slider = document.querySelector("#photoSlider");
+            if (!slider) return;
+
+            const slides = [...slider.querySelectorAll(".emoji-slide")];
+
+            const dotsWrap = document.querySelector("#sliderDots");
+            if (slides.length <= 1) return;
+
+            let idx = 0;
+            let timer = null;
+
+            if (dotsWrap) {
+                dotsWrap.innerHTML = "";
+                slides.forEach((_, i) => {
+                    const d = document.createElement("span");
+                    d.className = "dot" + (i === 0 ? " active" : "");
+                    d.addEventListener("click", () => goTo(i, true));
+                    dotsWrap.appendChild(d);
+                });
+            }
+
+            function setActive(newIdx) {
+                slides.forEach((s, i) => s.classList.toggle("active", i === newIdx));
+                if (dotsWrap) [...dotsWrap.children].forEach((d, i) => d.classList.toggle("active", i === newIdx));
+                idx = newIdx;
+            }
+
+            function goTo(newIdx, userAction = false) {
+                setActive(newIdx);
+                if (userAction) restart();
+            }
+
+            function next() {
+                setActive((idx + 1) % slides.length);
+            }
+
+            function start() {
+                timer = setInterval(next, 7000); // slow fade
+            }
+
+            function stop() {
+                if (timer) clearInterval(timer);
+                timer = null;
+            }
+
+            function restart() { stop(); start(); }
+
+            slider.addEventListener("touchstart", stop, { passive: true });
+            slider.addEventListener("touchend", restart, { passive: true });
+            slider.addEventListener("mouseenter", stop);
+            slider.addEventListener("mouseleave", restart);
+
+            start();
+        })();
+
+        showScreen("#intro");
+    </script>
+</body>
+
+</html>
